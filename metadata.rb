@@ -11,3 +11,5 @@ recipe 'sysstat', 'Installs/Configures sysstat'
 %w(debian ubuntu).each do |os|
   supports os
 end
+
+depends 'cron'

@@ -18,8 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# TODO:
-#   [ ] sanity-check RHEL support
 
 package 'sysstat' do
   action node['sysstat']['package_action'].to_sym
@@ -56,4 +54,8 @@ if platform? %w(debian ubuntu) # ~FC023
     )
     notifies :restart, 'service[sysstat]'
   end
+end
+
+if node['sysstat']['manage_cron']
+  include_recipe 'sysstat::cron'
 end
