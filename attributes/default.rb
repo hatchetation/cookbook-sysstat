@@ -23,6 +23,7 @@ default['sysstat']['package_action'] = 'upgrade'
 
 # some defaults, which may be tweaked per-platform
 default['sysstat']['enabled'] = 'true' #FIXSTRING
+default['sysstat']['manage_cron'] = true
 default['sysstat']['sadc_options'] = '-S DISK'
 default['sysstat']['config_file'] = '/etc/sysconfig/sysstat'
 default['sysstat']['sa1_cmd'] = '/usr/lib64/sa/sa1'

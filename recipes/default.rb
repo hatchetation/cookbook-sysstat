@@ -57,3 +57,7 @@ if platform? %w(debian ubuntu) # ~FC023
     notifies :restart, 'service[sysstat]'
   end
 end
+
+if node['sysstat']['manage_cron']
+  include_recipe 'sysstat::cron'
+end
