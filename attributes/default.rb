@@ -4,6 +4,7 @@
 # Recipe:: default
 #
 # Copyright 2012-2014, John Dewey
+#           2015-, Nick Hatch
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +19,25 @@
 # limitations under the License.
 #
 
-default['sysstat']['settings'] = File.join(
-  File::SEPARATOR, 'etc', 'default', 'sysstat'
-)
-default['sysstat']['enabled'] = 'true'
-default['sysstat']['sa1_options'] = '-S DISK'
-default['sysstat']['sa2_options'] = ''
 default['sysstat']['package_action'] = 'upgrade'
+
+# some defaults, which may be tweaked per-platform
+default['sysstat']['enabled'] = 'true' #FIXSTRING
+default['sysstat']['manage_cron'] = true
+default['sysstat']['sadc_options'] = '-S DISK'
+default['sysstat']['config_file'] = '/etc/sysconfig/sysstat'
+default['sysstat']['sa1_cmd'] = '/usr/lib64/sa/sa1'
+
+case node['platform_family']
+when 'debian'
+  default['sysstat']['config_file'] = '/etc/sysstat/sysstat'
+  default['sysstat']['sa1_cmd'] = 'debian-sa1'
+  case node['platform_version'].to_f
+  when 12.04
+    default['sysstat']['sadc_options'] = ''
+    default['sysstat']['sa1_options'] = '-S DISK'
+    default['sysstat']['sa2_options'] = ''
+  when 14.04
+    default['sysstat']['sadc_options'] = '-S DISK'
+  end
+end
