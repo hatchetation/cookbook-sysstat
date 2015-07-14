@@ -52,7 +52,7 @@ if platform? %w(debian ubuntu) # ~FC023
       sa1_options: node['sysstat']['sa1_options'],
       sa2_options: node['sysstat']['sa2_options']
     )
-    notifies :restart, 'service[sysstat]'
+    notifies :restart, 'service[sysstat]', :immediately
   end
 end
 
