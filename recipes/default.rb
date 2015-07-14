@@ -37,7 +37,7 @@ template node['sysstat']['config_file'] do
   variables(
     sadc_options: node['sysstat']['sadc_options']
   )
-  notifies :restart, 'service[sysstat]'
+  notifies :restart, 'service[sysstat]', :immediately
 end
 
 if platform? %w(debian ubuntu) # ~FC023
