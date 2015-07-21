@@ -25,7 +25,6 @@ end
 
 service 'sysstat' do
   supports restart: true, status: true
-
   action [:enable, :start]
 end
 
@@ -37,7 +36,7 @@ template node['sysstat']['config_file'] do
   variables(
     sadc_options: node['sysstat']['sadc_options']
   )
-  notifies :restart, 'service[sysstat]', :immediately
+  notifies :restart, 'service[sysstat]' unless node['sysstat']['skip_restart']
 end
 
 if platform? %w(debian ubuntu) # ~FC023
@@ -52,7 +51,7 @@ if platform? %w(debian ubuntu) # ~FC023
       sa1_options: node['sysstat']['sa1_options'],
       sa2_options: node['sysstat']['sa2_options']
     )
-    notifies :restart, 'service[sysstat]', :immediately
+    notifies :restart, 'service[sysstat]' unless node['sysstat']['skip_restart']
   end
 end
 
