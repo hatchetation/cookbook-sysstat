@@ -25,7 +25,7 @@ end
 
 service 'sysstat' do
   supports restart: true, status: true
-  action [:enable, :start]
+  action node['sysstat']['service_action']
 end
 
 template node['sysstat']['config_file'] do
