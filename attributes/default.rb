@@ -32,6 +32,7 @@ default['sysstat']['manage_cron'] = false
 # restart because of an exclusive lock on the sysstat log file held by sadc. if
 # `manage_cron` is enabled, you probably want to follow here.
 default['sysstat']['skip_restart'] = false
+default['sysstat']['service_action'] = [:enable, :start]
 
 case node['platform_family']
 when 'debian'
