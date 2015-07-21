@@ -23,10 +23,15 @@ default['sysstat']['package_action'] = 'upgrade'
 
 # some defaults, which may be tweaked per-platform
 default['sysstat']['enabled'] = 'true' #FIXSTRING
-default['sysstat']['manage_cron'] = true
 default['sysstat']['sadc_options'] = '-S DISK'
 default['sysstat']['config_file'] = '/etc/sysconfig/sysstat'
 default['sysstat']['sa1_cmd'] = '/usr/lib64/sa/sa1'
+
+default['sysstat']['manage_cron'] = false
+# when running sadc from cron with high frequency, sysstat will often fail to
+# restart because of an exclusive lock on the sysstat log file held by sadc. if
+# `manage_cron` is enabled, you probably want to follow here.
+default['sysstat']['skip_restart'] = false
 
 case node['platform_family']
 when 'debian'
