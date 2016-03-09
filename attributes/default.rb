@@ -27,6 +27,8 @@ default['sysstat']['sadc_options'] = '-S DISK'
 default['sysstat']['config_file'] = '/etc/sysconfig/sysstat'
 default['sysstat']['sa1_cmd'] = '/usr/lib64/sa/sa1'
 
+default['sysstat']['retention']['purge_after'] = 7
+default['sysstat']['retention']['compress_after'] = 10
 default['sysstat']['manage_cron'] = false
 # when running sadc from cron with high frequency, sysstat will often fail to
 # restart because of an exclusive lock on the sysstat log file held by sadc. if

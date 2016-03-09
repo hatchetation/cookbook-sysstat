@@ -34,7 +34,9 @@ template node['sysstat']['config_file'] do
   group 'root'
   mode '0644'
   variables(
-    sadc_options: node['sysstat']['sadc_options']
+    sadc_options: node['sysstat']['sadc_options'],
+    purge_after: node['sysstat']['retention']['purge_after'],
+    compress_after: node['sysstat']['retention']['compress_after'],
   )
   notifies :restart, 'service[sysstat]' unless node['sysstat']['skip_restart']
 end

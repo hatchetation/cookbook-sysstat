@@ -4,10 +4,10 @@
 # Used by sa2(8) script
 # If value is greater than 28, then log files are kept in
 # multiple directories, one for each month.
-HISTORY=7
+HISTORY=<%= @purge_after %>
 
 # Compress (using gzip or bzip2) sa and sar files older than (in days):
-COMPRESSAFTER=10
+COMPRESSAFTER=<%= @compress_after %>
 
 # Parameters for the system activity data collector (see sadc(8) manual page)
 # which are used for the generation of log files.
